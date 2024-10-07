@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   const url = process.env.WEBSITE_URL;
-  const token = process.env.GITHUB_TOKEN;
 
   if (!url) {
     console.error('No URL provided');
