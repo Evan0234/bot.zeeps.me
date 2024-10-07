@@ -2,7 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Checker Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px 0;
+        }
+        #response {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Website Checker Bot</h1>
@@ -20,24 +36,18 @@
             const responseDiv = document.getElementById('response');
             
             try {
-                const response = await fetch('https://api.github.com/repos/Evan0234/bot.zeeps.me/actions/workflows/bot.yml/dispatches', {
+                const response = await fetch('/api/submit', {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${GITHUB_TOKEN}`, 
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ref: 'main', // or the branch you want to use
-                        inputs: { website }
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ website })
                 });
 
+                const result = await response.json();
+
                 if (response.ok) {
-                    responseDiv.innerText = 'Website submitted successfully. The bot is checking it!';
+                    responseDiv.innerText = result.message;
                 } else {
-                    const error = await response.json();
-                    responseDiv.innerText = `Failed to trigger workflow: ${error.message}`;
+                    responseDiv.innerText = `Failed to trigger workflow: ${result.message}`;
                 }
             } catch (error) {
                 responseDiv.innerText = 'Error submitting website. Please try again.';
