@@ -1,4 +1,5 @@
 // File: api/submit.js
+
 const fetch = require('node-fetch');
 
 export default async (req, res) => {
@@ -10,7 +11,7 @@ export default async (req, res) => {
 
     const owner = 'Evan0234'; 
     const repo = 'bot.zeeps.me'; 
-    const githubToken = process.env.G_TOKEN; // Ensure this is set in Vercel Environment Variables
+    const githubToken = process.env.G_TOKEN; // Ensure this is set in your environment variables
 
     try {
         const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/bot.yml/dispatches`, {
