@@ -11,7 +11,7 @@ on:
 jobs:
   visit-website:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,6 +28,7 @@ jobs:
         run: node visit-website.js
         env:
           WEBSITE_URL: ${{ github.event.inputs.website }}
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
 
       - name: Upload Screenshot
         uses: actions/upload-artifact@v2
