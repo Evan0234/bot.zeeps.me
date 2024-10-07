@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Checker Bot</title>
+</head>
+<body>
+    <h1>Website Checker Bot</h1>
+    <form id="websiteForm">
+        <label for="website">Enter Website URL:</label>
+        <input type="url" id="website" name="website" required>
+        <button type="submit">Check Website</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('websiteForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const website = document.getElementById('website').value;
+            const responseDiv = document.getElementById('response');
+            
+            try {
+                const response = await fetch('https://api.github.com/repos/Evan0234/bot.zeeps.me/actions/workflows/bot.yml/dispatches', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${GITHUB_TOKEN}`, 
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ref: 'main', // or the branch you want to use
+                        inputs: { website }
+                    })
+                });
+
+                if (response.ok) {
+                    responseDiv.innerText = 'Website submitted successfully. The bot is checking it!';
+                } else {
+                    const error = await response.json();
+                    responseDiv.innerText = `Failed to trigger workflow: ${error.message}`;
+                }
+            } catch (error) {
+                responseDiv.innerText = 'Error submitting website. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
