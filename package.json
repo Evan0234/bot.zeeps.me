@@ -1,0 +1,14 @@
+{
+  "name": "website-bot",
+  "version": "1.0.0",
+  "description": "A bot to visit a specified website.",
+  "main": "visit-website.js",
+  "scripts": {
+    "start": "node visit-website.js"
+  },
+  "dependencies": {
+    "puppeteer": "^19.7.2"
+  },
+  "author": "me <3",
+  "license": "MIT"
+}
