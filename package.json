@@ -1,7 +1,7 @@
 {
-  "name": "website-bot",
+  "name": "website-checker-bot",
   "version": "1.0.0",
-  "description": "A bot to visit a specified website.",
+  "description": "A bot to check websites using GitHub Actions.",
   "main": "visit-website.js",
   "scripts": {
     "start": "node visit-website.js"
