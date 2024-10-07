@@ -1,0 +1,36 @@
+name: Website Bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      website:
+        description: 'URL of the website to visit'
+        required: true
+        default: 'https://example.com'
+
+jobs:
+  visit-website:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Visit Website
+        run: node visit-website.js
+        env:
+          WEBSITE_URL: ${{ github.event.inputs.website }}
+
+      - name: Upload Screenshot
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot
+          path: screenshot.png
