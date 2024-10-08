@@ -21,17 +21,9 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install Puppeteer
-        run: npm install puppeteer
-
-      - name: Visit Website
-        run: node visit-website.js
+      - name: Check Website
+        run: |
+          echo "Checking the website: ${{ github.event.inputs.website }}"
         env:
           WEBSITE_URL: ${{ github.event.inputs.website }}
           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
-
-      - name: Upload Screenshot
-        uses: actions/upload-artifact@v2
-        with:
-          name: screenshot
-          path: screenshot.png
