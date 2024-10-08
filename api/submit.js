@@ -10,8 +10,8 @@ export default async (req, res) => {
             return res.status(400).json({ message: 'Website URL is required.' });
         }
 
-        const owner = 'Evan0234'; // Replace with your GitHub username
-        const repo = 'bot.zeeps.me'; // Replace with your GitHub repository name
+        const owner = 'Evan0234'; 
+        const repo = 'bot.zeeps.me'; 
         const githubToken = process.env.G_TOKEN; // Ensure this is set in your environment variables
 
         try {
